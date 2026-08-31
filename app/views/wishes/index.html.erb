@@ -3,6 +3,8 @@
 <%= link_to "やりたいことを追加", "/wishes/new" %>
 
 <% @wishes.each do |wish| %>
-  <h2><%= wish.title %></h2>
+  <h2>
+  <%= link_to wish.title, "/wishes/#{wish.id}" %>
+  </h2>
   <p><%= wish.description %></p>
 <% end %>

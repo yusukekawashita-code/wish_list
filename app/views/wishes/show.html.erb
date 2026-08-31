@@ -1,0 +1,7 @@
+<h1><%= @wish.title %></h1>
+
+<p><%= @wish.description %></p>
+
+<%= link_to "一覧に戻る", "/wishes" %>
+
+<%= button_to "削除する", @wish, method: :delete %>

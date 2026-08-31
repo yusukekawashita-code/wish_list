@@ -3,6 +3,14 @@ class WishesController < ApplicationController
     @wishes = Wish.all
   end
 
+  def show
+    @wish = Wish.find(params[:id])
+  end
+
+  def edit
+    @wish = Wish.find(params[:id])
+  end
+
   def new
     @wish = Wish.new
   end
@@ -15,6 +23,23 @@ class WishesController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def update
+    @wish = Wish.find(params[:id])
+
+    if @wish.update(wish_params)
+      redirect_to @wish
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @wish = Wish.find(params[:id])
+    @wish.destroy
+
+    redirect_to "/wishes"
   end
 
   private
