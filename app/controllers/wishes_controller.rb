@@ -1,7 +1,7 @@
 class WishesController < ApplicationController
   before_action :require_login
-  before_action :set_wish, only: [:show, :edit, :update, :destroy]
-  
+  before_action :set_wish, only: [ :show, :edit, :update, :destroy ]
+
   def index
     @wishes = current_user.wishes
 
