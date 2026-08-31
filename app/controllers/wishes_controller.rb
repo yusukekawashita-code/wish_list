@@ -1,8 +1,9 @@
 class WishesController < ApplicationController
+  before_action :require_login
   before_action :set_wish, only: [:show, :edit, :update, :destroy]
-
+  
   def index
-    @wishes = Wish.all
+    @wishes = current_user.wishes
   end
 
   def show
@@ -13,7 +14,7 @@ class WishesController < ApplicationController
   end
 
   def create
-    @wish = Wish.new(wish_params)
+    @wish = current_user.wishes.new(wish_params)
 
     if @wish.save
       redirect_to wishes_path
@@ -41,7 +42,7 @@ class WishesController < ApplicationController
   private
 
   def set_wish
-    @wish = Wish.find(params[:id])
+    @wish = current_user.wishes.find(params[:id])
   end
 
   def wish_params

@@ -1,5 +1,9 @@
 <h1>やりたいことリスト</h1>
 
+<p><%= current_user.name %> さんでログイン中</p>
+
+<%= button_to "ログアウト", logout_path, method: :delete %>
+
 <%= link_to "やりたいことを追加", new_wish_path %>
 
 <% @wishes.each do |wish| %>
