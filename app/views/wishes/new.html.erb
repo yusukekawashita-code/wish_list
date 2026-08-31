@@ -20,6 +20,11 @@
   </div>
 
   <div>
+    <%= form.label :category, "カテゴリー" %>
+    <%= form.select :category, ["旅行", "学習", "仕事", "趣味", "欲しいもの", "挑戦", "その他"], prompt: "カテゴリーを選択してください" %>
+  </div>
+
+  <div>
     <%= form.submit "登録する" %>
   </div>
 <% end %>

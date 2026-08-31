@@ -6,12 +6,24 @@
 
 <%= link_to "やりたいことを追加", new_wish_path %>
 
+<%= form_with url: wishes_path, method: :get do |form| %>
+  <%= form.select :category,
+    ["旅行", "学習", "仕事", "趣味", "欲しいもの", "挑戦", "その他"],
+    { include_blank: "すべて", selected: params[:category] } %>
+
+  <%= form.submit "絞り込む" %>
+<% end %>
+
 <% @wishes.each do |wish| %>
   <h2>
     <%= link_to wish.title, wish_path(wish) %>
   </h2>
 
   <p><%= wish.description %></p>
+
+  <% if wish.category.present? %>
+    <p>カテゴリー：<%= wish.category %></p>
+  <% end %>
 
   <p>
     状態：

@@ -4,6 +4,10 @@ class WishesController < ApplicationController
   
   def index
     @wishes = current_user.wishes
+
+    if params[:category].present?
+      @wishes = @wishes.where(category: params[:category])
+    end
   end
 
   def show
@@ -46,6 +50,6 @@ class WishesController < ApplicationController
   end
 
   def wish_params
-    params.require(:wish).permit(:title, :description, :completed)
+    params.require(:wish).permit(:title, :description, :completed, :category)
   end
 end

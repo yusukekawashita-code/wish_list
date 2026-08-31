@@ -2,6 +2,10 @@
 
 <p><%= @wish.description %></p>
 
+<% if @wish.category.present? %>
+  <p>カテゴリー：<%= @wish.category %></p>
+<% end %>
+
 <p>
   状態：
   <%= @wish.completed ? "達成済み" : "未達成" %>
