@@ -1,30 +1,45 @@
-<h1>やりたいことを追加</h1>
+<div class="form-page">
+  <div class="form-page__header">
+    <h1 class="form-page__title">やりたいことを追加</h1>
+    <p class="form-page__lead">新しい目標や夢を記録しましょう。</p>
+  </div>
 
-<% if @wish.errors.any? %>
-  <div>
-    <% @wish.errors.full_messages.each do |message| %>
-      <p><%= message %></p>
+  <div class="form-card">
+    <% if @wish.errors.any? %>
+      <div class="form-errors">
+        <% @wish.errors.full_messages.each do |message| %>
+          <p><%= message %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%= form_with model: @wish, class: "wish-form" do |form| %>
+      <div class="wish-form__group">
+        <%= form.label :title, "タイトル", class: "wish-form__label" %>
+        <%= form.text_field :title, class: "wish-form__input" %>
+      </div>
+
+      <div class="wish-form__group">
+        <%= form.label :description, "説明", class: "wish-form__label" %>
+        <%= form.text_area :description, class: "wish-form__textarea" %>
+      </div>
+
+      <div class="wish-form__group">
+        <%= form.label :category, "カテゴリー", class: "wish-form__label" %>
+
+        <%= form.select :category,
+          ["旅行", "学習", "仕事", "趣味", "欲しいもの", "挑戦", "その他"],
+          { prompt: "カテゴリーを選択してください" },
+          class: "wish-form__select" %>
+      </div>
+
+      <div class="wish-form__actions">
+        <%= form.submit "登録する", class: "wish-form__submit" %>
+      </div>
     <% end %>
   </div>
-<% end %>
 
-<%= form_with model: @wish do |form| %>
-  <div>
-    <%= form.label :title, "タイトル" %>
-    <%= form.text_field :title %>
+  <div class="form-page__back">
+    <%= link_to "← 一覧に戻る", wishes_path %>
   </div>
-
-  <div>
-    <%= form.label :description, "説明" %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div>
-    <%= form.label :category, "カテゴリー" %>
-    <%= form.select :category, ["旅行", "学習", "仕事", "趣味", "欲しいもの", "挑戦", "その他"], prompt: "カテゴリーを選択してください" %>
-  </div>
-
-  <div>
-    <%= form.submit "登録する" %>
-  </div>
-<% end %>
+</div>

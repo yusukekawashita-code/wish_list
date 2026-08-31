@@ -1,32 +1,47 @@
-<h1>やりたいことリスト</h1>
+<div class="wish-page">
+  <div class="wish-page__header">
+    <div>
+      <h1 class="wish-page__title">やりたいことリスト</h1>
+      <p class="wish-page__lead">いつか叶えたいことを、少しずつ記録していきましょう。</p>
+    </div>
 
-<p><%= current_user.name %> さんでログイン中</p>
+    <%= link_to "＋ やりたいことを追加", new_wish_path, class: "wish-page__add" %>
+  </div>
 
-<%= button_to "ログアウト", logout_path, method: :delete %>
+  <div class="wish-filter">
+    <%= form_with url: wishes_path, method: :get, class: "wish-filter__form" do |form| %>
+      <%= form.select :category,
+        ["旅行", "学習", "仕事", "趣味", "欲しいもの", "挑戦", "その他"],
+        { include_blank: "すべて", selected: params[:category] },
+        class: "wish-filter__select" %>
 
-<%= link_to "やりたいことを追加", new_wish_path %>
+      <%= form.submit "絞り込む", class: "wish-filter__button" %>
+    <% end %>
+  </div>
 
-<%= form_with url: wishes_path, method: :get do |form| %>
-  <%= form.select :category,
-    ["旅行", "学習", "仕事", "趣味", "欲しいもの", "挑戦", "その他"],
-    { include_blank: "すべて", selected: params[:category] } %>
+  <div class="wish-list">
+    <% @wishes.each do |wish| %>
+      <article class="wish-card">
+        <% if wish.category.present? %>
+          <p class="wish-card__category"><%= wish.category %></p>
+        <% end %>
 
-  <%= form.submit "絞り込む" %>
-<% end %>
+        <h2 class="wish-card__title">
+          <%= link_to wish.title, wish_path(wish) %>
+        </h2>
 
-<% @wishes.each do |wish| %>
-  <h2>
-    <%= link_to wish.title, wish_path(wish) %>
-  </h2>
+        <p class="wish-card__description">
+          <%= wish.description %>
+        </p>
 
-  <p><%= wish.description %></p>
+        <div class="wish-card__footer">
+          <span class="wish-card__status <%= wish.completed ? "is-completed" : "is-pending" %>">
+            <%= wish.completed ? "達成済み" : "未達成" %>
+          </span>
 
-  <% if wish.category.present? %>
-    <p>カテゴリー：<%= wish.category %></p>
-  <% end %>
-
-  <p>
-    状態：
-    <%= wish.completed ? "達成済み" : "未達成" %>
-  </p>
-<% end %>
+          <%= link_to "詳細を見る →", wish_path(wish), class: "wish-card__link" %>
+        </div>
+      </article>
+    <% end %>
+  </div>
+</div>

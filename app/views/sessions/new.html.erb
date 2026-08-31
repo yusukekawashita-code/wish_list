@@ -1,21 +1,34 @@
-<h1>ログイン</h1>
-
-<% if flash.now[:alert] %>
-  <p><%= flash.now[:alert] %></p>
-<% end %>
-
-<%= form_with url: login_path do |form| %>
-  <div>
-    <%= form.label :email, "メールアドレス" %>
-    <%= form.email_field :email %>
+<div class="form-page">
+  <div class="form-page__header">
+    <h1 class="form-page__title">ログイン</h1>
+    <p class="form-page__lead">Wish Listにログインしましょう。</p>
   </div>
 
-  <div>
-    <%= form.label :password, "パスワード" %>
-    <%= form.password_field :password %>
+  <div class="form-card">
+    <% if flash.now[:alert] %>
+      <div class="form-errors">
+        <p><%= flash.now[:alert] %></p>
+      </div>
+    <% end %>
+
+    <%= form_with url: login_path, class: "wish-form" do |form| %>
+      <div class="wish-form__group">
+        <%= form.label :email, "メールアドレス", class: "wish-form__label" %>
+        <%= form.email_field :email, class: "wish-form__input" %>
+      </div>
+
+      <div class="wish-form__group">
+        <%= form.label :password, "パスワード", class: "wish-form__label" %>
+        <%= form.password_field :password, class: "wish-form__input" %>
+      </div>
+
+      <div class="wish-form__actions">
+        <%= form.submit "ログイン", class: "wish-form__submit" %>
+      </div>
+    <% end %>
   </div>
 
-  <div>
-    <%= form.submit "ログイン" %>
+  <div class="form-page__back">
+    <%= link_to "アカウントをお持ちでない方はこちら", new_user_path %>
   </div>
-<% end %>
+</div>

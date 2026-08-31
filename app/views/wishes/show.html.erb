@@ -1,27 +1,48 @@
-<h1><%= @wish.title %></h1>
+<div class="detail-page">
+  <div class="detail-card">
+    <% if @wish.category.present? %>
+      <p class="detail-card__category"><%= @wish.category %></p>
+    <% end %>
 
-<p><%= @wish.description %></p>
+    <h1 class="detail-card__title"><%= @wish.title %></h1>
 
-<% if @wish.category.present? %>
-  <p>カテゴリー：<%= @wish.category %></p>
-<% end %>
+    <p class="detail-card__description">
+      <%= @wish.description %>
+    </p>
 
-<p>
-  状態：
-  <%= @wish.completed ? "達成済み" : "未達成" %>
-</p>
+    <div class="detail-card__status">
+      <span class="wish-card__status <%= @wish.completed ? "is-completed" : "is-pending" %>">
+        <%= @wish.completed ? "達成済み" : "未達成" %>
+      </span>
+    </div>
 
-<% if @wish.completed %>
-  <%= button_to "未達成に戻す", @wish, method: :patch, params: { wish: { completed: false } } %>
-<% else %>
-  <%= button_to "達成済みにする", @wish, method: :patch, params: { wish: { completed: true } } %>
-<% end %>
+    <div class="detail-card__toggle">
+      <% if @wish.completed %>
+        <%= button_to "未達成に戻す",
+          @wish,
+          method: :patch,
+          params: { wish: { completed: false } },
+          class: "detail-card__toggle-button" %>
+      <% else %>
+        <%= button_to "達成済みにする",
+          @wish,
+          method: :patch,
+          params: { wish: { completed: true } },
+          class: "detail-card__toggle-button" %>
+      <% end %>
+    </div>
 
+    <div class="detail-card__actions">
+      <%= link_to "編集する", edit_wish_path(@wish), class: "detail-card__edit" %>
 
-<%= link_to "編集する", edit_wish_path(@wish) %>
+      <%= button_to "削除する",
+        @wish,
+        method: :delete,
+        class: "detail-card__delete" %>
+    </div>
+  </div>
 
-
-<%= link_to "一覧に戻る", wishes_path %>
-
-
-<%= button_to "削除する", @wish, method: :delete %>
+  <div class="detail-page__back">
+    <%= link_to "← 一覧に戻る", wishes_path %>
+  </div>
+</div>

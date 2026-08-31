@@ -23,7 +23,27 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+<body>
+  <header class="header">
+    <div class="header__inner">
+      <%= link_to "Wish List", wishes_path, class: "header__logo" %>
+
+      <% if current_user %>
+        <div class="header__user">
+          <span><%= current_user.name %> さん</span>
+          <%= button_to "ログアウト", logout_path, method: :delete, class: "header__logout" %>
+        </div>
+      <% else %>
+        <div class="header__guest">
+          <%= link_to "ログイン", login_path, class: "header__login" %>
+          <%= link_to "新規登録", new_user_path, class: "header__signup" %>
+        </div>
+      <% end %>
+    </div>
+  </header>
+
+  <main class="main">
     <%= yield %>
-  </body>
+  </main>
+</body>
 </html>

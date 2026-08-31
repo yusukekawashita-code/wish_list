@@ -1,10 +1,604 @@
-/*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #f7f8fa;
+  color: #333;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", sans-serif;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.header {
+  background-color: #fff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.header__inner {
+  max-width: 1100px;
+  height: 72px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__logo {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.header__user {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 14px;
+}
+
+.header__logout {
+  padding: 8px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.header__logout:hover {
+  background-color: #f3f4f6;
+}
+
+.main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 24px;
+}
+.wish-page__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.wish-page__title {
+  margin: 0;
+  font-size: 32px;
+}
+
+.wish-page__lead {
+  margin: 8px 0 0;
+  color: #6b7280;
+}
+
+.wish-page__add {
+  display: inline-block;
+  padding: 12px 20px;
+  border-radius: 10px;
+  background-color: #111827;
+  color: #fff;
+  font-weight: 700;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.wish-page__add:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.wish-filter {
+  margin-bottom: 32px;
+}
+
+.wish-filter__form {
+  display: flex;
+  gap: 12px;
+}
+
+.wish-filter__select {
+  min-width: 180px;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.wish-filter__button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #e5e7eb;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.wish-filter__button:hover {
+  background-color: #d1d5db;
+}
+
+.wish-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.wish-card {
+  padding: 24px;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  background-color: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+  animation: fade-up 0.45s ease both;
+}
+
+.wish-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
+.wish-card__category {
+  display: inline-block;
+  margin: 0 0 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background-color: #eef2ff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.wish-card__title {
+  margin: 0;
+  font-size: 22px;
+}
+
+.wish-card__title a {
+  transition: opacity 0.2s ease;
+}
+
+.wish-card__title a:hover {
+  opacity: 0.65;
+}
+
+.wish-card__description {
+  margin: 12px 0 24px;
+  color: #6b7280;
+}
+
+.wish-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.wish-card__status {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.wish-card__link {
+  font-size: 14px;
+  font-weight: 700;
+  transition: transform 0.2s ease;
+}
+
+.wish-card__link:hover {
+  transform: translateX(3px);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .wish-page__header {
+    flex-direction: column;
+  }
+
+  .wish-list {
+    grid-template-columns: 1fr;
+  }
+
+  .wish-filter__form {
+    flex-direction: column;
+  }
+}
+
+.wish-card__status {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.wish-card__status.is-pending {
+  background-color: #f3f4f6;
+  color: #4b5563;
+}
+
+.wish-card__status.is-completed {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+.wish-card:nth-child(1) {
+  animation-delay: 0.05s;
+}
+
+.wish-card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.wish-card:nth-child(3) {
+  animation-delay: 0.15s;
+}
+
+.wish-card:nth-child(4) {
+  animation-delay: 0.2s;
+}
+
+.wish-card:nth-child(5) {
+  animation-delay: 0.25s;
+}
+
+.wish-card:nth-child(6) {
+  animation-delay: 0.3s;
+}
+
+.form-page {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.form-page__header {
+  margin-bottom: 32px;
+}
+
+.form-page__title {
+  margin: 0;
+  font-size: 32px;
+}
+
+.form-page__lead {
+  margin: 8px 0 0;
+  color: #6b7280;
+}
+
+.form-card {
+  padding: 32px;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  background-color: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  animation: fade-up 0.45s ease both;
+}
+
+.wish-form__group {
+  margin-bottom: 24px;
+}
+
+.wish-form__label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.wish-form__input,
+.wish-form__textarea,
+.wish-form__select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background-color: #fff;
+  font: inherit;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.wish-form__input:focus,
+.wish-form__textarea:focus,
+.wish-form__select:focus {
+  border-color: #6b7280;
+  box-shadow: 0 0 0 3px rgba(107, 114, 128, 0.12);
+}
+
+.wish-form__textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.wish-form__actions {
+  margin-top: 32px;
+}
+
+.wish-form__submit {
+  width: 100%;
+  padding: 13px 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #111827;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.wish-form__submit:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.form-page__back {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.form-page__back a {
+  color: #6b7280;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.form-page__back a:hover {
+  color: #111827;
+}
+
+.form-errors {
+  margin-bottom: 24px;
+  padding: 16px 20px;
+  border-radius: 10px;
+  background-color: #fef2f2;
+  color: #b91c1c;
+  font-size: 14px;
+}
+
+.form-errors p {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .form-card {
+    padding: 24px 20px;
+  }
+
+  .form-page__title {
+    font-size: 28px;
+  }
+}
+.wish-form__checkbox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: fit-content;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.wish-form__checkbox input {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  margin: 0;
+  appearance: none;
+  border-radius: 999px;
+  background-color: #d1d5db;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+.wish-form__checkbox input::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.25s ease;
+}
+
+.wish-form__checkbox input:checked {
+  background-color: #22c55e;
+}
+
+.wish-form__checkbox input:checked::before {
+  transform: translateX(20px);
+}
+.detail-page {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.detail-card {
+  padding: 40px;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  background-color: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  animation: fade-up 0.45s ease both;
+}
+
+.detail-card__category {
+  display: inline-block;
+  margin: 0 0 16px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background-color: #eef2ff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.detail-card__title {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.4;
+}
+
+.detail-card__description {
+  margin: 16px 0 24px;
+  color: #6b7280;
+  white-space: pre-wrap;
+}
+
+.detail-card__status {
+  margin-bottom: 24px;
+}
+
+.detail-card__toggle {
+  margin-bottom: 32px;
+}
+
+.detail-card__toggle form {
+  margin: 0;
+}
+
+.detail-card__toggle-button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 9px;
+  background-color: #111827;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.detail-card__toggle-button:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.detail-card__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 24px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.detail-card__edit {
+  padding: 9px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.detail-card__edit:hover {
+  background-color: #f3f4f6;
+  transform: translateY(-1px);
+}
+
+.detail-card__delete {
+  padding: 9px 16px;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #dc2626;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.detail-card__delete:hover {
+  background-color: #fef2f2;
+  transform: translateY(-1px);
+}
+
+.detail-page__back {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.detail-page__back a {
+  color: #6b7280;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.detail-page__back a:hover {
+  color: #111827;
+}
+
+@media (max-width: 768px) {
+  .detail-card {
+    padding: 28px 20px;
+  }
+
+  .detail-card__title {
+    font-size: 28px;
+  }
+}
+.header__guest {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header__login,
+.header__signup {
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.header__login {
+  border: 1px solid #d1d5db;
+  background-color: #fff;
+}
+
+.header__signup {
+  background-color: #111827;
+  color: #fff;
+}
+
+.header__login:hover,
+.header__signup:hover {
+  transform: translateY(-2px);
+}
+
+.header__login:hover {
+  background-color: #f3f4f6;
+}
