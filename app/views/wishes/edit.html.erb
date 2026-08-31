@@ -12,6 +12,11 @@
   </div>
 
   <div>
+    <%= form.label :completed, "達成済み" %>
+    <%= form.check_box :completed %>
+  </div>
+
+  <div>
     <%= form.submit "更新する" %>
   </div>
 <% end %>

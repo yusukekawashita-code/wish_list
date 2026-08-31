@@ -2,6 +2,22 @@
 
 <p><%= @wish.description %></p>
 
-<%= link_to "一覧に戻る", "/wishes" %>
+<p>
+  状態：
+  <%= @wish.completed ? "達成済み" : "未達成" %>
+</p>
+
+<% if @wish.completed %>
+  <%= button_to "未達成に戻す", @wish, method: :patch, params: { wish: { completed: false } } %>
+<% else %>
+  <%= button_to "達成済みにする", @wish, method: :patch, params: { wish: { completed: true } } %>
+<% end %>
+
+
+<%= link_to "編集する", edit_wish_path(@wish) %>
+
+
+<%= link_to "一覧に戻る", wishes_path %>
+
 
 <%= button_to "削除する", @wish, method: :delete %>

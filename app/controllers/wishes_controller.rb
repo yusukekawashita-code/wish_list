@@ -1,14 +1,11 @@
 class WishesController < ApplicationController
+  before_action :set_wish, only: [:show, :edit, :update, :destroy]
+
   def index
     @wishes = Wish.all
   end
 
   def show
-    @wish = Wish.find(params[:id])
-  end
-
-  def edit
-    @wish = Wish.find(params[:id])
   end
 
   def new
@@ -19,15 +16,16 @@ class WishesController < ApplicationController
     @wish = Wish.new(wish_params)
 
     if @wish.save
-      redirect_to "/wishes"
+      redirect_to wishes_path
     else
       render :new, status: :unprocessable_entity
     end
   end
 
-  def update
-    @wish = Wish.find(params[:id])
+  def edit
+  end
 
+  def update
     if @wish.update(wish_params)
       redirect_to @wish
     else
@@ -36,15 +34,17 @@ class WishesController < ApplicationController
   end
 
   def destroy
-    @wish = Wish.find(params[:id])
     @wish.destroy
-
-    redirect_to "/wishes"
+    redirect_to wishes_path
   end
 
   private
 
+  def set_wish
+    @wish = Wish.find(params[:id])
+  end
+
   def wish_params
-    params.require(:wish).permit(:title, :description)
+    params.require(:wish).permit(:title, :description, :completed)
   end
 end
